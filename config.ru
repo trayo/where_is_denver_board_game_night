@@ -1,6 +1,7 @@
 require 'bundler'
 Bundler.require
 
-require_relative "app/server"
+require File.expand_path('../config/environment',  __FILE__)
+
 run BoardGameNight::Server
 
