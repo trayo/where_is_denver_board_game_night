@@ -1,26 +1,21 @@
 require "nokogiri"
 require "open-uri"
 
-module BoardGameNight
-  class DateFetcher
+class DateFetcher
 
-    def self.fetch
+  def self.update
+    doc = Nokogiri::HTML(open("http://www.reddit.com/r/Denver/wiki/wednesdaymeetup"))
 
-      doc = Nokogiri::HTML(open("http://www.reddit.com/r/Denver/wiki/wednesdaymeetup"))
+    lines = doc.at_css("#wiki_tentative_schedule").next_element.children.map(&:text)
 
-      lines = doc.at_css("#wiki_tentative_schedule").next_element.children.map(&:text)
+    lines.delete("\n")
 
-      lines.delete("\n")
+    lines.map! {|l| l.split(": ")}
 
-      lines.map! {|l| l.split(": ")}
-
-      lines.map! do |date, loc|
-        [Date.parse(date), loc]
-      end
-
-      lines.drop_while {|l| l.first < Date.today}
-    end
-
+    lines.map! do |date, location|
+      date = Date.parse(date)
+      [date, location] if date > Date.today
+    end.compact!
   end
 end
 
