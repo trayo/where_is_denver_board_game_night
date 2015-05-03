@@ -1,5 +1,8 @@
+require "bundler"
+Bundler.require
 require 'rake/testtask'
-require_relative "app/date_fetcher"
+require "sinatra/activerecord/rake"
+require_relative "app/models/date_fetcher"
 
 Rake::TestTask.new do |t|
   t.pattern = 'test/**/*_test.rb'
