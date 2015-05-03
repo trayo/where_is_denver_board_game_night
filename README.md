@@ -1,4 +1,4 @@
-# Where is Denver boardgame night?
+# Where is Denver board game night?
 
 This is the source code for the [r/Denver](http://www.reddit.com/r/Denver/)
 Wednesday board game group website that tells you, simply, where board game night
