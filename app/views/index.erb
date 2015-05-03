@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
     <title>Where is board game night?</title>
+    <meta name="description" content="Where is board game night?">
+    <meta name="keywords" content="reddit/r/denver, r/denver, denver, board games, board game night, game night" />
+
     <link rel="stylesheet" type="text/css" href="<%= url("stylesheets/main.css")%>">
     <link rel="icon" type="image/ico" href="<%= url("images/favicon.ico")%>">
   </head>
 
   <body class="background">
+    <div class="center">
 
-    <h1><%= locals[:date] %></h1>
-    <h1><%= locals[:location] %></h1>
+      <h1><%= locals[:location] %></h1>
+
+      <h2>
+        <a href="https://www.google.com/maps/dir/Current+Location/<%= locals[:location] %>">
+          Directions to <%= locals[:location] %>
+        </a>
+      </h2>
+    </div>
 
   </body>
 </html>
