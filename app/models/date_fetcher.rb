@@ -1,4 +1,3 @@
-require "nokogiri"
 require "open-uri"
 
 class DateFetcher
@@ -12,6 +11,7 @@ class DateFetcher
 
     lines.map! {|l| l.split(": ")}
 
+    require "pry"; binding.pry
     lines.map! do |date, location|
       date = Date.parse(date)
       [date, location] if date > Date.today
