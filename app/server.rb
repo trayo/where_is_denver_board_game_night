@@ -1,8 +1,8 @@
 module BoardGameNight
   class Server < Sinatra::Base
     get '/' do
-      @location = Location.first
-      erb :index, :locals => {date: l.first, location: l.last}
+      l = Location.first
+      erb :index, locals: {date: l.date, name: l.name}
     end
 
     # get '/directions' do
