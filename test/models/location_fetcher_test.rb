@@ -3,6 +3,12 @@ require "./app/models/location_fetcher"
 
 module BoardGameNight
   class LocationFetcherTest < Minitest::Test
+
+    def setup
+      @original_stdout = $stdout
+      $stdout = StringIO.new
+    end
+
     def test_it_parses_fetched_lines
       lines = [
         "\n",
@@ -60,15 +66,24 @@ module BoardGameNight
       assert_equal "wow. such location", Location.first.name
     end
 
+    def test_it_can_delete_all_locations
+      4.times { |i| Location.create(date: Date.tomorrow, name: "#{i}") }
+      assert_equal 4, Location.count
+
+      LocationFetcher.destroy_locations
+      assert_equal 0, Location.count
+    end
+
     def test_it_can_fetch_from_reddit
       VCR.use_cassette "fetch from reddit" do
-        LocationFetcher.update
+        LocationFetcher.update_locations
       end
 
       assert_equal 4, Location.count
     end
 
     def teardown
+      $stdout = @original_stdout
       Location.destroy_all
     end
   end
