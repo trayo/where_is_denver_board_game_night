@@ -1,4 +1,4 @@
-# require your gems
+# require gems
 require 'bundler'
 Bundler.require
 
@@ -12,7 +12,7 @@ require_relative "../app/server"
 # require the model
 Dir[APP_ROOT.join('app', 'models', '*.rb')].each { |file| require file }
 
-# require your database configurations
+# require database configurations
 require APP_ROOT.join('config', 'database')
 
 # configure Server settings
