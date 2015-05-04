@@ -60,28 +60,17 @@ module BoardGameNight
       assert_equal "wow. such location", Location.first.name
     end
 
+    def test_it_can_fetch_from_reddit
+      VCR.use_cassette "fetch from reddit" do
+        LocationFetcher.update
+      end
+
+      assert_equal 4, Location.count
+    end
+
     def teardown
       Location.destroy_all
     end
   end
 end
 
-#     LINES = [
-#       "\n",
-#       "April 11th: Tabletop Day at Irish Snug",
-#       "\n",
-#       "April 15th: Diebolt Brewing",
-#       "\n",
-#       "April 22nd: Wit's End ",
-#       "\n",
-#       "April 29th: Beryls Brewing ",
-#       "\n",
-#       "May 6th: Diebolt Brewing",
-#       "\n",
-#       "May 13th: Strange Craft Brewing ",
-#       "\n",
-#       "May 20th: Bicycle Cafe",
-#       "\n",
-#       "May 27th: Black Sky ",
-#       "\n"
-#     ]

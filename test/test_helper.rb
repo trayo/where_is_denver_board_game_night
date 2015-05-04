@@ -1,10 +1,12 @@
 ENV["RACK_ENV"] ||= "test"
-require 'bundler'
+require "bundler"
 Bundler.require
 
-require 'simplecov'
+require "simplecov"
 SimpleCov.start
 
 require File.expand_path("../../config/environment", __FILE__)
-require 'minitest/autorun'
-require 'minitest/pride'
+require "minitest/autorun"
+require "minitest/pride"
+require "vcr"
+
