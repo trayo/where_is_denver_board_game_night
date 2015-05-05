@@ -14,3 +14,7 @@ It uses [PostgreSQL](http://www.postgresql.org/) and
 [ActiveRecord](https://github.com/janko-m/sinatra-activerecord) for easy access to data.  
 It fetches new dates and locations from the [r/Denver/wiki](http://www.reddit.com/r/Denver/wiki/wednesdaymeetup)
 using [Nokogiri](http://www.nokogiri.org/).
+
+### License
+
+[MIT License](http://opensource.org/licenses/MIT)
