@@ -1,23 +1,22 @@
 # require gems
-require 'bundler'
+require "bundler"
 Bundler.require
 
-require 'sinatra'
-require "sinatra/activerecord/rake"
-require 'tilt/erb'
+require "sinatra"
+require "tilt/erb"
 
 # set the pathname for the root of the app
-require 'pathname'
-APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
+require "pathname"
+APP_ROOT = Pathname.new(File.expand_path("../../", __FILE__))
 
 # require the server
 require_relative "../app/server"
 
 # require the model
-Dir[APP_ROOT.join('app', 'models', '*.rb')].each { |file| require file }
+Dir[APP_ROOT.join("app", "models", "*.rb")].each { |file| require file }
 
 # require database configurations
-require APP_ROOT.join('config', 'database')
+require APP_ROOT.join("config", "database")
 
 # configure Server settings
 module BoardGameNight

@@ -1,18 +1,18 @@
 require "bundler"
 Bundler.require
 
-require 'rake/testtask'
-# require "sinatra/activerecord/rake"
+require "rake/testtask"
+require "sinatra/activerecord/rake"
 
 Rake::TestTask.new do |t|
-  t.pattern = 'test/**/*_test.rb'
+  t.pattern = "test/**/*_test.rb"
 end
 
 task default: :test
 
 desc "Sets up the environment for :update_locations"
 task :environment do
-  require File.expand_path('config/environment', File.dirname(__FILE__))
+  require File.expand_path("config/environment", File.dirname(__FILE__))
 end
 
 desc "Update the database with locations from r/denver"
