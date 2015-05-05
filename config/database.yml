@@ -10,4 +10,9 @@ test:
 
 production:
   adapter: postgresql
+  encoding: unicode
+  # pool: 5
+  # host: localhost
   database: game-night-production
+  username: gamenight
+  password: <%= ENV["DATABASE_PASSWORD"] %>
