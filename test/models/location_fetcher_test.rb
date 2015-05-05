@@ -1,4 +1,4 @@
-require './test/test_helper'
+require "./test/test_helper"
 require "./app/models/location_fetcher"
 
 module BoardGameNight
