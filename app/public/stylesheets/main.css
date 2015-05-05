@@ -1,8 +1,64 @@
-html {
-  width: 100%;
-  height 100%;
+/* $background: */
+/* $link: */
+/* $link-hover: */
+/* $content: */
+/* $line: */
+
+
+body {
+  background-color: #55ABA2;
+  background-image: url(../images/hexagon_pattern.png);
 }
 
-.background {
+h1 {
+  margin: 10px;
+}
+
+a {
+  color: #D84043;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #5FCEB7;
+}
+
+.center {
+  position: absolute;
+  text-align: center;
+  top: 5%;
+  width: 100%;
+}
+
+.content {
+  background-color: #FAE5B0;
+  border-radius: 5px;
+  font-family: fantasy;
+  display: inline-block;
+  font-size: 20px;
+  width: 85%;
+}
+
+.footer {
+  background-color: #FAE5B0;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 15px;
+  margin-top: 20px;
+  width: 85%;
+}
+
+.line {
+  border-top-style: solid;
+  border-top-color: #070F16;
+  border-top-width: 3px;
+  display: inherit;
+  margin-left: auto;
+  width: 35em;
+}
+
+.title {
+  margin-top: 30px;
+  margin-bottom: 0px;
 }
 
