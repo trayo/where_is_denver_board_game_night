@@ -10,18 +10,20 @@
 
     <link rel="stylesheet" type="text/css" href="<%= url("stylesheets/main.css")%>">
     <link rel="icon" type="image/ico" href="<%= url("images/favicon.ico")%>">
+
+    <link href='http://fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css'>
   </head>
 
   <body class="center">
 
-    <div class="content">
+    <div class="content main">
       <h2 class="title">Where is r/Denver board game night?</h2>
 
       <div class="line"></div>
 
       <% if locals[:date].today? %>
         <h1><%= "Board game night is tonight at" %></h1>
-        <h1><%= locals[:name] %></h1>
+        <h1><%= "#{locals[:name]}!" %></h1>
         <h1><%= "Let's play some board games!" %></h1>
       <% else %>
         <h1><%= "The next board game night is" %></h1>
@@ -40,7 +42,7 @@
     </div>
   </body>
 
-  <div class="footer">
+  <div class="content footer">
     <h3>
       This site is an
       <a href="http://github.com/trayo/where_is_denver_board_game_night">open source project</a>

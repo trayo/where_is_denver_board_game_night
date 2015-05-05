@@ -1,8 +1,8 @@
-/* $background: */
-/* $link: */
-/* $link-hover: */
-/* $content: */
-/* $line: */
+/* $background: #55ABA2 */
+/* $link: #D84043       */
+/* $link-hover: #3FC3DB */
+/* $content: #FAE5B0    */
+/* $line: # 070F16      */
 
 
 body {
@@ -20,7 +20,7 @@ a {
 }
 
 a:hover {
-  color: #5FCEB7;
+  color: #3FC3DB;
 }
 
 .center {
@@ -33,19 +33,18 @@ a:hover {
 .content {
   background-color: #FAE5B0;
   border-radius: 5px;
-  font-family: fantasy;
   display: inline-block;
-  font-size: 20px;
+  font-family: 'Exo', sans-serif;
   width: 85%;
 }
 
+.content {
+  font-size: 22px;
+}
+
 .footer {
-  background-color: #FAE5B0;
-  border-radius: 5px;
-  display: inline-block;
-  font-size: 15px;
+  font-size: 18px;
   margin-top: 20px;
-  width: 85%;
 }
 
 .line {
