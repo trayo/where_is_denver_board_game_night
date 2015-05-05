@@ -13,4 +13,4 @@ production:
   adapter: postgresql
   encoding: unicode
   # host: localhost
-  database: game-night-production
+  # database: game-night-production
