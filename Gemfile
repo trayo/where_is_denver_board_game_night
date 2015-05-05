@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby "2.2.1"
+
 gem "activerecord"
 gem "nokogiri"
 gem "pg"
@@ -8,6 +10,7 @@ gem "sinatra-activerecord"
 
 
 group :development, :test do
+  gem "capybara"
   gem "minitest"
   gem "pry"
   gem "rake"
