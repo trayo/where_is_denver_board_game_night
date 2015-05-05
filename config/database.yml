@@ -12,5 +12,5 @@ production:
   pool: 5
   adapter: postgresql
   encoding: unicode
+  database: game_night_production
   # host: localhost
-  # database: game-night-production
