@@ -3,12 +3,13 @@ database_name = "game-night-#{BoardGameNight::Server.environment}"
 db = URI.parse(ENV['DATABASE_URL'] || "postgres://localhost/#{database_name}")
 
 # connect ActiveRecord with the current database
+  require "pry"; binding.pry
 ActiveRecord::Base.establish_connection(
   :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
   :host     => db.host,
   :port     => db.port,
   :username => db.user,
   :password => db.password,
-  :database => "#{database_name}",
+  :database => db.path[1..-1],
   :encoding => 'utf8'
 )
