@@ -3,6 +3,7 @@ require 'bundler'
 Bundler.require
 
 require 'sinatra'
+require "sinatra/activerecord/rake"
 require 'tilt/erb'
 
 # set the pathname for the root of the app
