@@ -4,6 +4,8 @@ This is the source code for the [r/Denver](http://www.reddit.com/r/Denver/)
 Wednesday board game group website that tells you, simply, where board game night
 is located.
 
+#### [Check it out on Heroku!](https://whereisdenverboardgamenight.herokuapp.com/)
+
 I was inspired by [is there a fucking rockies game](https://github.com/baer/isThereAFuckingGame)
 and thought that we needed something similar for board game night.
 
