@@ -1,6 +1,7 @@
 require "bundler"
 Bundler.require
 
+require_relative "app/server.rb"
 require "rake/testtask"
 require "sinatra/activerecord/rake"
 
@@ -9,6 +10,11 @@ Rake::TestTask.new do |t|
 end
 
 task default: :test
+
+desc "Hopefully lets you mess about with active record"
+task :console => :environment do
+  BoardGameNight::Console.run
+end
 
 desc "Sets up the environment for :update_locations"
 task :environment do
