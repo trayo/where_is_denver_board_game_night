@@ -79,7 +79,7 @@ module BoardGameNight
         LocationFetcher.update_locations
       end
 
-      assert_equal 4, Location.count
+      assert_equal 3, Location.count
     end
 
     def teardown
