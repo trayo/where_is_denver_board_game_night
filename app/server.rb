@@ -1,7 +1,7 @@
 module BoardGameNight
   class Server < Sinatra::Base
     get '/' do
-      location = Location.first
+      location = Location.order(:date).first
       if location
         erb :index, locals: {date: location.date, name: location.name}
       else
@@ -11,7 +11,7 @@ module BoardGameNight
 
     get '/directions' do
       if Location.first
-        location = Location.first.name.gsub(" ", "+")
+        location = Location.order(:date).first.name.gsub(" ", "+")
         redirect "https://www.google.com/maps/dir/Current+Location/#{location}"
       else
         erb :error, locals: {message: location_not_found}
