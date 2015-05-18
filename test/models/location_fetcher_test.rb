@@ -5,22 +5,28 @@ module BoardGameNight
   class LocationFetcherTest < Minitest::Test
 
     def setup
+      # stubs stdout to silence output from 'puts'
       @original_stdout = $stdout
       $stdout = StringIO.new
+    end
+
+    def teardown
+      $stdout = @original_stdout
+      Location.destroy_all
     end
 
     def test_it_parses_fetched_lines
       lines = [
         "\n",
-        "April 11th: Tabletop Day at Irish Snug",
+        "April 11th 2200: Tabletop Day at Irish Snug",
         "\n",
-        "April 15th: Diebolt Brewing"
+        "April 15th 2200: Diebolt Brewing"
       ]
 
-      expected = [
-        [Date.parse("April 11th"), "Tabletop Day at Irish Snug"],
-        [Date.parse("April 15th"), "Diebolt Brewing"]
-      ]
+      expected = {
+        Date.parse("April 11th 2200") => "Tabletop Day at Irish Snug",
+        Date.parse("April 15th 2200") => "Diebolt Brewing"
+      }
 
       assert_equal expected, LocationFetcher.new(lines).lines
     end
@@ -66,25 +72,12 @@ module BoardGameNight
       assert_equal "wow. such location", Location.first.name
     end
 
-    def test_it_can_delete_all_locations
-      4.times { |i| Location.create(date: Date.tomorrow, name: "#{i}") }
-      assert_equal 4, Location.count
-
-      LocationFetcher.destroy_locations
-      assert_equal 0, Location.count
-    end
-
     def test_it_can_fetch_from_reddit
       VCR.use_cassette "fetch from reddit" do
         LocationFetcher.update_locations
       end
 
       assert_equal 3, Location.count
-    end
-
-    def teardown
-      $stdout = @original_stdout
-      Location.destroy_all
     end
   end
 end
