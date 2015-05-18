@@ -1,11 +1,9 @@
 require "open-uri"
 
 module BoardGameNight
-
   class LocationFetcher
-
-    def self.update_locations
-      new(fetch_dates_and_locations).create_locations
+    def self.update_events_and_locations
+      new(fetch_dates_and_locations).create_events_and_locations
     end
 
     def self.fetch_dates_and_locations
@@ -13,52 +11,68 @@ module BoardGameNight
       .at_css("#wiki_tentative_schedule").next_element.children.map(&:text)
     end
 
-    def self.destroy_locations
-      Location.destroy_all
-    end
-
     attr_reader :lines
 
     def initialize(lines)
-      @lines = parse(lines)
+      @lines = parse(lines).to_h
+      @dates, @locations = @lines.keys, @lines.values
     end
 
-    def create_locations
-      @lines.each do |date, location|
-        if after_today_and_doesnt_exist?(date)
-          l = Location.create(date: date, name: location)
-          puts "Location #{l.name} on #{l.date} created!"
-        elsif before_today_and_does_exist?(date)
-          l = Location.find_by(date: date).destroy
-          puts "Location #{l.name} destroyed!"
+    def create_events_and_locations
+      @lines.each do |date, location_name|
+        location = Location.find_by(name: location_name)
+        event = Event.find_by(date: date)
+
+        if location && location.events.include?(event)
+          # do nothing?
+          # print already added location and event
+
+        elsif location # and no event
+          location.events << Event.create(date)
+
+        elsif Event.exists?(date)
+          event = Event.find_by(date: date)
+          location = event.location
+          location.update_attribute(name: location_name)
         else
-          print_date_before_today_or_already_exists(date, location)
         end
       end
+
+      # create_events
+      # create_locations
     end
 
     private
 
-    def print_date_before_today_or_already_exists(date, location)
-      if date < Date.today
-        puts "Already happened #{location} on #{date}."
-      else
-        puts "Already added #{location} on #{date}."
+    def remove_old_events_and_locations(lines)
+      lines.reject { |date, _location| before_today?(date) }
+    end
+
+    def create_events
+      @dates.each do |date|
+        if Event.exists?(date: date)
+          puts "Event not created on #{date}"
+        else
+          puts "Created event on #{date} with location id: #{@lines[date]}"
+          Event.create(location_id: @lines[date], date: date)
+        end
+        # Event.update_or_create(date)
       end
     end
 
-    def after_today_and_doesnt_exist?(date)
-      date > Date.today && !Location.exists?(date: date)
+    def create_locations
+      @locations
     end
 
-    def before_today_and_does_exist?(date)
-      date < Date.today && Location.exists?(date: date)
+    def before_today?(date)
+      date < Date.today
     end
 
     def parse(lines)
       lines.delete("\n")
       lines.map! { |l| l.split(": ") }
-      lines.each { |l| l[0] = Date.parse(l[0]) }
+      lines.map! { |date, location| [Date.parse(date), location] }
+      remove_old_events_and_locations(lines)
     end
   end
 end
