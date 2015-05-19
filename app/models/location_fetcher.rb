@@ -70,6 +70,8 @@ module BoardGameNight
 
     def create_locations
       @locations
+    def formatted(date)
+      date.strftime("%A %B %d, %Y")
     end
 
     def before_today?(date)
