@@ -12,6 +12,11 @@ module BoardGameNight
     def self.fetch_dates_and_locations
       Nokogiri::HTML(open(REDDIT_URL))
         .at_css(REDDIT_CSS)
+        .next_element
+        .children
+        .map(&:text)
+        .map(&:strip)
+        .delete_if(&:empty?)
     end
 
     attr_reader :lines
