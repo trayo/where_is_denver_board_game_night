@@ -46,8 +46,6 @@ module BoardGameNight
         end
       end
 
-      # create_events
-      # create_locations
     end
 
     private
@@ -56,20 +54,6 @@ module BoardGameNight
       lines.reject { |date, _location| before_today?(date) }
     end
 
-    def create_events
-      @dates.each do |date|
-        if Event.exists?(date: date)
-          puts "Event not created on #{date}"
-        else
-          puts "Created event on #{date} with location id: #{@lines[date]}"
-          Event.create(location_id: @lines[date], date: date)
-        end
-        # Event.update_or_create(date)
-      end
-    end
-
-    def create_locations
-      @locations
     def formatted(date)
       date.strftime("%A %B %d, %Y")
     end
