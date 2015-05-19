@@ -13,6 +13,7 @@ module BoardGameNight
     def teardown
       $stdout = @original_stdout
       Location.destroy_all
+      Event.destroy_all
     end
 
     def test_it_parses_fetched_lines
