@@ -68,11 +68,15 @@ module BoardGameNight
     end
 
     def test_it_can_fetch_from_reddit
+      dates_and_locations = []
+
       VCR.use_cassette "fetch from reddit" do
-        LocationFetcher.update_locations
+        dates_and_locations = LocationFetcher.fetch_dates_and_locations
       end
 
-      assert_equal 3, Location.count
+      assert_equal 8, dates_and_locations.length
+      assert_equal "May 6th: Diebolt Brewing", dates_and_locations.first
+    end
     end
   end
 end
