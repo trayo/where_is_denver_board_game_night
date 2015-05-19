@@ -18,9 +18,7 @@ module BoardGameNight
 
     def test_it_parses_fetched_lines
       lines = [
-        "\n",
         "April 11th 2200: Tabletop Day at Irish Snug",
-        "\n",
         "April 15th 2200: Diebolt Brewing"
       ]
 
