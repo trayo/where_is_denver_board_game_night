@@ -67,6 +67,18 @@ module BoardGameNight
       assert_equal 1, Event.count
     end
 
+    def test_it_deletes_old_events_that_already_happened
+      Event.create(date: Date.yesterday)
+      lines = [
+        "#{Date.yesterday}: Captains Log Brewery",
+        "#{days_from_now(5)}: Die Hard Brews"
+      ]
+
+      LocationFetcher.new(lines).create_events_and_locations
+
+      assert_equal 1, Event.count
+    end
+
     def test_it_can_fetch_from_reddit
       dates_and_locations = []
 
