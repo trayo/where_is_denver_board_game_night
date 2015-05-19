@@ -23,6 +23,7 @@ module BoardGameNight
 
     def initialize(lines)
       @lines = parse(lines).to_h
+      remove_old_events_and_locations
       @dates, @locations = @lines.keys, @lines.values
     end
 
@@ -46,8 +47,13 @@ module BoardGameNight
 
     private
 
-    def remove_old_events_and_locations(lines)
-      lines.reject { |date, _location| before_today?(date) }
+    def remove_old_events_and_locations
+      @lines.each do |date, _location|
+        if before_today?(date) && event = Event.find_by(date: date)
+          event.destroy
+        end
+      end
+      @lines.reject! { |date, _location| before_today?(date) }
     end
 
     def formatted(date)
@@ -59,9 +65,10 @@ module BoardGameNight
     end
 
     def parse(lines)
-      lines.map! { |l| l.split(": ") }
-      lines.map! { |date, location| [Date.parse(date), location] }
-      remove_old_events_and_locations(lines)
+      lines.map do |line|
+        date, location = line.split(": ")
+        [Date.parse(date), location]
+      end
     end
   end
 end
