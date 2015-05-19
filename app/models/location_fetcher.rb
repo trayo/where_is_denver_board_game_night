@@ -29,23 +29,19 @@ module BoardGameNight
     def create_events_and_locations
       @lines.each do |date, location_name|
         location = Location.find_by(name: location_name)
-        event = Event.find_by(date: date)
+        event = Event.find_or_create_by(date: date)
 
         if location && location.events.include?(event)
-          # do nothing?
-          # print already added location and event
-
-        elsif location # and no event
-          location.events << Event.create(date)
-
-        elsif Event.exists?(date)
-          event = Event.find_by(date: date)
-          location = event.location
-          location.update_attribute(name: location_name)
+          puts "Already created: #{location.name} on #{formatted(event.date)}."
+        elsif event.location
+          event.location.update_attributes(name: location_name)
+          puts "Updated: #{event.location.name} on #{formatted(event.date)}."
         else
+          location = Location.create(name: location_name)
+          location.events << event
+          puts "New location: #{location.name} on #{formatted(event.date)}."
         end
       end
-
     end
 
     private
