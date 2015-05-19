@@ -63,7 +63,6 @@ module BoardGameNight
     end
 
     def parse(lines)
-      lines.delete("\n")
       lines.map! { |l| l.split(": ") }
       lines.map! { |date, location| [Date.parse(date), location] }
       remove_old_events_and_locations(lines)
