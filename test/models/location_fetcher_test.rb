@@ -77,6 +77,9 @@ module BoardGameNight
       assert_equal 8, dates_and_locations.length
       assert_equal "May 6th: Diebolt Brewing", dates_and_locations.first
     end
+
+    def days_from_now(num)
+      Time.now.advance(days: num).to_date
     end
   end
 end
