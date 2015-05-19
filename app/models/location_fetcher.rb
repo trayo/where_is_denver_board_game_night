@@ -2,13 +2,16 @@ require "open-uri"
 
 module BoardGameNight
   class LocationFetcher
+    REDDIT_URL = "http://www.reddit.com/r/Denver/wiki/wednesdaymeetup"
+    REDDIT_CSS = "#wiki_tentative_schedule"
+
     def self.update_events_and_locations
       new(fetch_dates_and_locations).create_events_and_locations
     end
 
     def self.fetch_dates_and_locations
-      Nokogiri::HTML(open("http://www.reddit.com/r/Denver/wiki/wednesdaymeetup"))
-      .at_css("#wiki_tentative_schedule").next_element.children.map(&:text)
+      Nokogiri::HTML(open(REDDIT_URL))
+        .at_css(REDDIT_CSS)
     end
 
     attr_reader :lines
