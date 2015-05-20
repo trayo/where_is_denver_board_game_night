@@ -24,20 +24,20 @@
       <% if locals[:date].today? %>
         <h1><%= "Oh snap!" %></h1>
         <h1><%= "Board game night is tonight at" %></h1>
-        <h1><%= "#{locals[:name]}!" %></h1>
+        <h1><%= "#{locals[:location]}!" %></h1>
         <h1><%= "Let's play some board games!" %></h1>
       <% else %>
         <h1><%= "The next board game night is" %></h1>
         <h1><%= locals[:date].strftime("%A, %B %d %Y") %></h1>
         <h1><%= "at" %></h1>
-        <h1><%= locals[:name] %></h1>
+        <h1><%= locals[:location] %></h1>
       <% end %>
 
       <div class="line"></div>
 
       <h2>
         <a href="/directions">
-          Click here for directions to <%= locals[:name] %>
+          Click here for directions to <%= locals[:location] %>
         </a>
       </h2>
     </div>
