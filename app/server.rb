@@ -1,20 +1,22 @@
 module BoardGameNight
   class Server < Sinatra::Base
     get '/' do
-      location = Location.order(:date).first
-      if location
-        erb :index, locals: {date: location.date, name: location.name}
+      event = Event.first
+      if event
+        erb :index, locals: { date: event.date, location: event.name }
       else
-        erb :error, locals: {message: location_not_found}
+        erb :error, locals: { message: event_not_found }
       end
     end
 
     get '/directions' do
-      if Location.first
-        location = Location.order(:date).first.name.gsub(" ", "+")
-        redirect "https://www.google.com/maps/dir/Current+Location/#{location}"
+      if Event.first.address
+        redirect "https://www.google.com/maps/dir/Current+Location/#{next_event.address}"
+      elsif Event.first
+        location_name = Event.first.name.gsub(" ", "+")
+        redirect "https://www.google.com/maps/dir/Current+Location/#{location_name}"
       else
-        erb :error, locals: {message: location_not_found}
+        erb :error, locals: { message: location_not_found }
       end
     end
 
@@ -24,8 +26,8 @@ module BoardGameNight
 
     private
 
-    def location_not_found
-      "Oops! I didn't find the next location."
+    def event_not_found
+      "Oops! I didn't find the next event and location."
     end
   end
 end

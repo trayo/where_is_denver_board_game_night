@@ -16,33 +16,47 @@ task :console => :environment do
   BoardGameNight::Console.run
 end
 
-desc "Sets up the environment for :update_locations"
+desc "Sets up the environment for :update_events"
 task :environment do
   require File.expand_path("config/environment", File.dirname(__FILE__))
 end
 
-desc "Update the database with locations from r/denver"
-task :update_locations => :environment do
+desc "Update the database with events and locations from r/denver"
+task :update_events_and_locations => :environment do
   if Date.today.thursday?
-    puts "Fetching dates and locations from reddit..."
-    BoardGameNight::LocationFetcher.update_locations
-    puts "Done!"
+    puts "Fetching dates and locations from reddit...\n"
+    BoardGameNight::LocationFetcher.update_events_and_locations
+    puts "\nDone!"
   else
     puts "It's not Thursday so I didn't update."
   end
 end
 
-desc "Wipe all locations from the database"
-task :destroy_locations => :environment do
-  puts "Destroying locations..."
-  l = BoardGameNight::LocationFetcher.destroy_locations
-  puts "Done! #{l.count} locations destroyed."
+desc "Destroys events and locations and then force updates"
+task :destroy_and_force_update => [ :destroy_events_and_locations, :force_update ]
+
+desc "Destroys events and locations"
+task :destroy_events_and_locations => [ :destroy_events, :destroy_locations ]
+
+desc "Forcefully updates the database with events and locations"
+task :force_update => :environment do
+  puts "Fetching dates and locations from reddit...\n\n"
+  BoardGameNight::LocationFetcher.update_events_and_locations
+  puts "\nDone!"
 end
 
-desc "Forcefully updates the database with locations"
-task :force_update => :environment do
-  puts "Fetching dates and locations from reddit..."
-  BoardGameNight::LocationFetcher.update_locations
-  puts "Done!"
+desc "Destroys all locations from the database"
+task :destroy_locations => :environment do
+  puts "Destroying locations...\n"
+  l = BoardGameNight::Location.destroy_all
+  puts "\nDone! #{l.count} locations destroyed."
 end
+
+desc "Destroys all events from the database"
+task :destroy_events => :environment do
+  puts "Destroying events...\n"
+  e = BoardGameNight::Event.destroy_all
+  puts "\nDone! #{e.count} events destroyed."
+end
+
 
