@@ -16,6 +16,21 @@ module BoardGameNight
       Event.destroy_all
     end
 
+    def days_from_now(num)
+      Time.now.advance(days: num).to_date
+    end
+
+    def test_it_can_fetch_from_reddit
+      dates_and_locations = []
+
+      VCR.use_cassette "fetch from reddit" do
+        dates_and_locations = LocationFetcher.fetch_dates_and_locations
+      end
+
+      assert_equal 8, dates_and_locations.length
+      assert_equal "May 6th: Diebolt Brewing", dates_and_locations.first
+    end
+
     def test_it_parses_fetched_lines
       lines = [
         "April 11th 2200: Tabletop Day at Irish Snug",
@@ -77,21 +92,6 @@ module BoardGameNight
       LocationFetcher.new(lines).create_events_and_locations
 
       assert_equal 1, Event.count
-    end
-
-    def test_it_can_fetch_from_reddit
-      dates_and_locations = []
-
-      VCR.use_cassette "fetch from reddit" do
-        dates_and_locations = LocationFetcher.fetch_dates_and_locations
-      end
-
-      assert_equal 8, dates_and_locations.length
-      assert_equal "May 6th: Diebolt Brewing", dates_and_locations.first
-    end
-
-    def days_from_now(num)
-      Time.now.advance(days: num).to_date
     end
   end
 end
