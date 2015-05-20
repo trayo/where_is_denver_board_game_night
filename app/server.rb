@@ -11,7 +11,7 @@ module BoardGameNight
 
     get '/directions' do
       if Event.first.address
-        redirect "https://www.google.com/maps/dir/Current+Location/#{next_event.address}"
+        redirect "https://www.google.com/maps/dir/Current+Location/#{Event.first.address}"
       elsif Event.first
         location_name = Event.first.name.gsub(" ", "+")
         redirect "https://www.google.com/maps/dir/Current+Location/#{location_name}"
