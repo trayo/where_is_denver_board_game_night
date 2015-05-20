@@ -59,7 +59,7 @@ module BoardGameNight
       assert_equal days_from_now(9), Event.last.date
     end
 
-    def test_it_doesnt_overwrite_existing_events_and_locations
+    def test_it_uses_existing_events_and_locations
       l = Location.create(name: "Super Smash Brewery")
       l.events << Event.create(date: days_from_now(3))
 
