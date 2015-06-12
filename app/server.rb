@@ -21,6 +21,22 @@ module BoardGameNight
       end
     end
 
+    get '/next_week' do
+      if event = Event.second
+        erb :index, locals: { date: event.date, location: event.name }
+      else
+        erb :error, locals: { message: event_not_found }
+      end
+    end
+
+    get '/next_week/next_week' do
+      if event = Event.third
+        erb :index, locals: { date: event.date, location: event.name }
+      else
+        erb :error, locals: { message: event_not_found }
+      end
+    end
+
     not_found do
       erb :error
     end
