@@ -1,8 +1,7 @@
 module BoardGameNight
   class Server < Sinatra::Base
     get '/' do
-      event = Event.first
-      if event
+      if event = Event.first
         erb :index, locals: { date: event.date, location: event.name }
       else
         erb :error, locals: { message: event_not_found }
