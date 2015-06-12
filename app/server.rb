@@ -9,10 +9,12 @@ module BoardGameNight
     end
 
     get '/directions' do
-      if Event.first.address
-        redirect "https://www.google.com/maps/dir/Current+Location/#{Event.first.address}"
-      elsif Event.first
-        location_name = Event.first.name.gsub(" ", "+")
+      event = Event.first
+
+      if event && event.address
+        redirect "https://www.google.com/maps/dir/Current+Location/#{event.address}"
+      elsif event
+        location_name = event.name.gsub(" ", "+")
         redirect "https://www.google.com/maps/dir/Current+Location/#{location_name}"
       else
         erb :error, locals: { message: location_not_found }
