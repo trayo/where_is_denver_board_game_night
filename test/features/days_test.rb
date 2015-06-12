@@ -52,6 +52,20 @@ module BoardGameNight
       assert has_content?(location.name),
         "Didn't find '#{location.name}' in #{body}"
     end
+
+    def test_it_has_next_week
+      location = Location.create(name: "Teen Titans GO!")
+
+      this_week = Date.today.strftime("%A, %B %d %Y")
+      location.events << Event.create(date: this_week)
+
+      next_week = Date.tomorrow.strftime("%A, %B %d %Y")
+      location.events << Event.create(date: next_week)
+
+      visit "/next_week"
+
+      assert has_content?(next_week),
+        "Didn't find '#{next_week}' in #{body}"
     end
   end
 end
