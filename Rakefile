@@ -23,12 +23,12 @@ end
 
 desc "Update the database with events and locations from r/denver"
 task :update_events_and_locations => :environment do
-  if Date.today.thursday?
+  if BoardGameNight::Event.first.date < Date.today
     puts "Fetching dates and locations from reddit...\n"
     BoardGameNight::LocationFetcher.update_events_and_locations
     puts "\nDone!"
   else
-    puts "It's not Thursday so I didn't update."
+    puts "Next event is after today so I didn't update."
   end
 end
 
