@@ -2,7 +2,7 @@ require "open-uri"
 
 module BoardGameNight
   class LocationFetcher
-    REDDIT_URL = "http://www.reddit.com/r/Denver/wiki/wednesdaymeetup"
+    REDDIT_URL = "https://www.reddit.com/r/Denver/wiki/wednesdaymeetup"
     REDDIT_CSS = "#wiki_tentative_schedule"
 
     def self.update_events_and_locations

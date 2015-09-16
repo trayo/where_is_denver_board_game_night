@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://www.reddit.com/r/Denver/wiki/wednesdaymeetup
+    uri: https://www.reddit.com/r/Denver/wiki/wednesdaymeetup
     body:
       encoding: US-ASCII
       string: ''
@@ -1159,6 +1159,6 @@ http_interactions:
         cnkgY29kZTogVVMuPC9zcGFuPjwvcD48c2NyaXB0IHR5cGU9InRleHQvamF2
         YXNjcmlwdCIgc3JjPSIvL3d3dy5yZWRkaXRzdGF0aWMuY29tL3JlZGRpdC5l
         bi5mVDcxR3ItVUhiMC5qcyI+PC9zY3JpcHQ+PC9ib2R5PjwvaHRtbD4=
-    http_version: 
+    http_version:
   recorded_at: Tue, 19 May 2015 03:50:01 GMT
 recorded_with: VCR 2.9.3
