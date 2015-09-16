@@ -71,7 +71,7 @@ module BoardGameNight
     def parse(lines)
       lines.map do |line|
         date, location = line.split(": ")
-        [Date.parse(date), location]
+        [Date.parse(date), location.delete("[]()")]
       end
     end
   end
