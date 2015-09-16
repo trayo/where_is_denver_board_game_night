@@ -9,6 +9,15 @@ is located.
 I was inspired by [is there a fucking rockies game](https://github.com/baer/isThereAFuckingGame)
 and thought that we needed something similar for board game night.
 
+### Nifty Features
+
+`/next_week` will show you next weeks location.
+
+`/next_week/next_week` will show you next next weeks location.
+
+`/directions` will attempt to show you Google Maps directions to
+the current location.
+
 ### The stack
 
 "Where is r/dever board game night?" is built on [Sinatra](http://www.sinatrarb.com/).
