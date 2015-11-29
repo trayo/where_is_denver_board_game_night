@@ -70,8 +70,8 @@ module BoardGameNight
 
     def parse(lines)
       lines.map do |line|
-        date, location = line.split(": ")
-        [Date.parse(date), location.delete("[]()")]
+        date, location = line.gsub(":", ": ").split(": ")
+        [Date.parse(date.strip), location.strip.delete("[]()")]
       end
     end
   end
