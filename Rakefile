@@ -38,7 +38,7 @@ task :destroy_and_force_update => [ :destroy_events_and_locations, :force_update
 desc "Destroys events and locations"
 task :destroy_events_and_locations => [ :destroy_events, :destroy_locations ]
 
-desc "Forcefully updates the database with events and locations"
+desc "Not typically used: Forcefully updates the database with events and locations"
 task :force_update => :environment do
   puts "Fetching dates and locations from reddit...\n\n"
   BoardGameNight::LocationFetcher.update_events_and_locations
@@ -59,4 +59,9 @@ task :destroy_events => :environment do
   puts "\nDone! #{e.count} events destroyed."
 end
 
-
+desc "Purge events older than today"
+task :purge_events => :environment do
+  puts "Purging events...\n"
+  e = BoardGameNight::Event.purge
+  puts "\nDone! #{e.count} events purged."
+end
