@@ -4,14 +4,13 @@ module BoardGameNight
   class LocationFetcher
     REDDIT_URL = "https://www.reddit.com/r/Denver/wiki/wednesdaymeetup"
     REDDIT_CSS = "#wiki_tentative_schedule"
-    USER_AGENT = ENV["USER_AGENT"]
 
     def self.update_events_and_locations
       new(fetch_dates_and_locations).create_events_and_locations
     end
 
     def self.fetch_dates_and_locations
-      Nokogiri::HTML(open(REDDIT_URL, "User-Agent" => USER_AGENT))
+      Nokogiri::HTML(open(REDDIT_URL, "User-Agent" => ENV["USER_AGENT"]))
       .at_css(REDDIT_CSS)
       .next_element
       .children
