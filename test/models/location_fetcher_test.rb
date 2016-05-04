@@ -5,13 +5,11 @@ module BoardGameNight
   class LocationFetcherTest < Minitest::Test
 
     def setup
-      # stubs stdout to silence output from 'puts'
-      @original_stdout = $stdout
-      $stdout = StringIO.new
+      silence_stdout
     end
 
     def teardown
-      $stdout = @original_stdout
+      unsilence_stdout
       Location.destroy_all
       Event.destroy_all
     end
@@ -93,6 +91,17 @@ module BoardGameNight
 
       assert_equal 1, Event.count
     end
+
+    private
+
+      def silence_stdout
+        @original_stdout = $stdout
+        $stdout = StringIO.new
+      end
+
+      def unsilence_stdout
+        $stdout = @original_stdout
+      end
   end
 end
 

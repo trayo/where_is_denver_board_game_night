@@ -4,7 +4,14 @@ module BoardGameNight
   class DaysTest < Minitest::Test
     include Capybara::DSL
 
+    WEEKDAY_MONTH_DAY_YEAR = "%A, %B %d %Y"
+
+    def setup
+      silence_stdout
+    end
+
     def teardown
+      unsilence_stdout
       Location.destroy_all
       Event.destroy_all
     end
@@ -14,58 +21,70 @@ module BoardGameNight
 
       expected = "Oops!"
 
-      assert has_content?(expected), "Didn't find '#{expected}' in #{body}"
+      assert has_content?(expected), error_didnt_find(expected)
     end
 
     def test_a_location_when_date_is_before_today
-      expected_message = "The next board game night is"
+      next_board_game_night = "The next board game night is"
       location_name = "yesterday brewery"
 
       location = Location.create(name: location_name)
-      date = Date.yesterday.strftime("%A, %B %d %Y")
+      date = Date.yesterday.strftime(WEEKDAY_MONTH_DAY_YEAR)
 
       location.events << Event.create(date: date)
       visit "/"
 
-      assert has_content?(expected_message),
-        "Didn't find '#{expected_message}' in #{body}"
+      assert has_content?(next_board_game_night), error_didnt_find(next_board_game_night)
 
-      assert has_content?(date),
-        "Didn't find '#{date}' in #{body}"
+      assert has_content?(date), error_didnt_find(date)
 
-      assert has_content?(location_name),
-        "Didn't find '#{location_name}' in #{body}"
+      assert has_content?(location_name), error_didnt_find(location_name)
     end
 
     def test_location_when_date_is_today
-      expected_message = "Board game night is tonight"
+      game_night_tonight = "Board game night is tonight"
+      location_name = "today brewery"
 
-      location = Location.create(name: "today brewery")
-      date = Date.today.strftime("%A, %B %d %Y")
+      location = Location.create(name: location_name)
+      date = Date.today.strftime(WEEKDAY_MONTH_DAY_YEAR)
 
       location.events << Event.create(date: date)
       visit "/"
 
-      assert has_content?(expected_message),
-        "Didn't find '#{expected_message}' in #{body}"
+      assert has_content?(game_night_tonight), error_didnt_find(game_night_tonight)
 
-      assert has_content?(location.name),
-        "Didn't find '#{location.name}' in #{body}"
+      assert has_content?(location_name), error_didnt_find(location_name)
     end
 
     def test_it_has_next_week
       location = Location.create(name: "Teen Titans GO!")
 
-      this_week = Date.today.strftime("%A, %B %d %Y")
+      this_week = Date.today.strftime(WEEKDAY_MONTH_DAY_YEAR)
       location.events << Event.create(date: this_week)
 
-      next_week = Date.tomorrow.strftime("%A, %B %d %Y")
+      next_week = Date.tomorrow.strftime(WEEKDAY_MONTH_DAY_YEAR)
       location.events << Event.create(date: next_week)
 
       visit "/next_week"
 
-      assert has_content?(next_week),
-        "Didn't find '#{next_week}' in #{body}"
+      assert has_content?(next_week), error_didnt_find(next_week)
     end
+    private
+
+      def error_didnt_find(date)
+        "\nDidn't find '#{date}' in:
+        #{"-"*20}
+        #{body.match(/<body.+<\/body/m)[0]}
+        #{"-"*20}"
+      end
+
+      def silence_stdout
+        @original_stdout = $stdout
+        $stdout = StringIO.new
+      end
+
+      def unsilence_stdout
+        $stdout = @original_stdout
+      end
   end
 end
