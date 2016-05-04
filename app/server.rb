@@ -37,6 +37,11 @@ module BoardGameNight
       end
     end
 
+    get '/update_events' do
+      Event.purge
+      redirect "/"
+    end
+
     not_found do
       erb :error
     end

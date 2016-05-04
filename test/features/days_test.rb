@@ -69,6 +69,24 @@ module BoardGameNight
 
       assert has_content?(next_week), error_didnt_find(next_week)
     end
+
+    def test_a_user_can_update_events
+      location = Location.create(name: "Smallville")
+
+      event_yesterday = Date.yesterday.strftime(WEEKDAY_MONTH_DAY_YEAR)
+      location.events << Event.create(date: event_yesterday)
+
+      event_tomorrow = Date.tomorrow.strftime(WEEKDAY_MONTH_DAY_YEAR)
+      location.events << Event.create(date: event_tomorrow)
+
+      visit "/"
+      assert has_content?(event_yesterday), error_didnt_find(event_yesterday)
+
+      visit "/update_events"
+
+      assert has_content?(event_tomorrow), error_didnt_find(event_tomorrow)
+    end
+
     private
 
       def error_didnt_find(date)
