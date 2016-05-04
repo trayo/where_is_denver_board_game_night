@@ -3,7 +3,6 @@ source "https://rubygems.org"
 ruby "2.3.1"
 
 gem "activerecord"
-gem "dotenv"
 gem "nokogiri"
 gem "pg"
 gem "pry"
@@ -12,6 +11,7 @@ gem "sinatra-activerecord"
 
 group :development, :test do
   gem "capybara"
+  gem "dotenv"
   gem "minitest"
   gem "rake"
   gem "shotgun"

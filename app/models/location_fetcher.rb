@@ -4,7 +4,7 @@ module BoardGameNight
   class LocationFetcher
     REDDIT_URL = "https://www.reddit.com/r/Denver/wiki/wednesdaymeetup"
     REDDIT_CSS = "#wiki_tentative_schedule"
-    USER_AGENT = "5HhN6lAq9FNy7g:amtNaB24vp-5z8NLulnXnRWz5Cs:v1.0.0 (by /u/trayo)"
+    USER_AGENT = ENV["USER_AGENT"]
 
     def self.update_events_and_locations
       new(fetch_dates_and_locations).create_events_and_locations

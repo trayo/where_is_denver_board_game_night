@@ -5,6 +5,9 @@ require_relative "app/server.rb"
 require "rake/testtask"
 require "sinatra/activerecord/rake"
 
+require 'dotenv'
+Dotenv.load
+
 Rake::TestTask.new do |t|
   t.pattern = "test/**/*_test.rb"
 end
