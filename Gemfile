@@ -11,7 +11,6 @@ gem "sinatra-activerecord"
 
 group :development, :test do
   gem "capybara"
-  gem "dotenv"
   gem "minitest"
   gem "rake"
   gem "shotgun"
