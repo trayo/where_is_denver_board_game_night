@@ -70,7 +70,11 @@ GEM
     sinatra-activerecord (2.0.6)
       activerecord (>= 3.2)
       sinatra (~> 1.0)
+    slim (3.0.6)
+      temple (~> 0.7.3)
+      tilt (>= 1.3.3, < 2.1)
     slop (3.6.0)
+    temple (0.7.6)
     thread_safe (0.3.5)
     tilt (2.0.1)
     tux (0.3.0)
@@ -102,6 +106,7 @@ DEPENDENCIES
   simplecov
   sinatra
   sinatra-activerecord
+  slim
   tux
   vcr
   webmock

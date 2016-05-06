@@ -8,6 +8,7 @@ gem "pg"
 gem "pry"
 gem "sinatra", require: "sinatra/base"
 gem "sinatra-activerecord"
+gem "slim"
 
 group :development, :test do
   gem "capybara"
