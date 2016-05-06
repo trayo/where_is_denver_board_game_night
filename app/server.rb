@@ -17,7 +17,7 @@ module BoardGameNight
         location_name = event.name.gsub(" ", "+")
         redirect "https://www.google.com/maps/dir/Current+Location/#{location_name}"
       else
-        slim :error, locals: { message: location_not_found }
+        slim :error, locals: { message: event_not_found }
       end
     end
 

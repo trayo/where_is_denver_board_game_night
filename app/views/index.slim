@@ -1,15 +1,6 @@
 doctype html
 html lang="en"
-  head
-    meta charset="utf-8"
-    meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"
-    title
-      | Seriously, where is it
-    meta name="description" content="Where is board game night?"
-    meta name="keywords" content="reddit.com/r/denver, r/denver, denver, board games, board game night, game night"
-    link rel="stylesheet" type="text/css" href="#{url("stylesheets/main.css")}"
-    link rel="icon" type="image/ico" href="#{url("images/favicon.ico")}"
-    link href="http://fonts.googleapis.com/css?family=Exo" rel="stylesheet" type="text/css"
+  == slim :_head
 
   body.center
     .content.main
@@ -35,11 +26,4 @@ html lang="en"
           '  Click here for directions to
           = locals[:location]
 
-  .content.footer
-    h3
-      '  This site is an
-      a href="http://github.com/trayo/where_is_denver_board_game_night" open source project
-      '  created and maintained by
-      a href="http://twitter.com/trayoda" Travis Yoder
-      ' . Something out of date?
-      a href="/update_events" Click here
+  == slim :_footer

@@ -1,49 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+doctype html
+html lang="en"
+  == slim :_head
 
-    <title>Seriously, where is it</title>
-    <meta name="description" content="Where is board game night?">
-    <meta name="keywords" content="reddit/r/denver, r/denver, denver, board games, board game night, game night" />
+  body.center
+    .content.main
 
-    <link rel="stylesheet" type="text/css" href="<%= url("stylesheets/main.css")%>">
-    <link rel="icon" type="image/ico" href="<%= url("images/favicon.ico")%>">
+      - if locals[:message]
+          h2 = locals[:message] if locals[:message]
+          .line
+          h2
+            a href="mailto:trayoda@gmail.com" Please send me an email that it's broken
+      - else
+          h2.title 404! Page not found!
+          .line
+          h2
+            a href="/" Try the homepage instead?
 
-    <link href='http://fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css'>
-  </head>
-
-  <body class="center">
-
-    <div class="content main">
-
-      <% if locals[:message] %>
-
-        <h2><%= locals[:message] if locals[:message] %></h2>
-
-        <div class="line"></div>
-
-        <h2><a href="mailto:trayoda@gmail.com">Please send me an email that it's broken</a></h2>
-
-      <% else %>
-        <h2 class="title">404! Page not found!</h2>
-
-        <div class="line"></div>
-
-        <h2><a href="/">Try the homepage instead?</a></h2>
-      <% end %>
-
-    </div>
-  </body>
-
-  <div class="content footer">
-    <h3>
-      This site is an
-      <a href="http://github.com/trayo/where_is_denver_board_game_night">open source project</a>
-      created and maintained by
-      <a href="http://twitter.com/trayoda">Travis Yoder</a>.
-    </h3>
-  </div>
-</html>
-
+  == slim :_footer
