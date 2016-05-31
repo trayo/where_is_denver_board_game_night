@@ -92,6 +92,20 @@ module BoardGameNight
       assert_equal 1, Event.count
     end
 
+    def test_it_can_fuzzy_find_a_location_without_creating_a_new_one
+      l = Location.create(name: "Super Smash Brewery")
+      l.events << Event.create(date: days_from_now(3))
+      lines = [
+        "#{days_from_now(3)}: Super Smash Brewery",
+        "#{days_from_now(4)}: Super Smash",
+      ]
+
+      LocationFetcher.new(lines).create_events_and_locations
+
+      assert_equal 1, Location.count
+      assert_equal 2, Event.count
+    end
+
     private
 
       def silence_stdout

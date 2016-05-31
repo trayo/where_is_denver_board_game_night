@@ -29,7 +29,7 @@ module BoardGameNight
 
     def create_events_and_locations
       @lines.each do |date, location_name|
-        location = Location.find_by("name LIKE ?", location_name)
+        location = Location.find_by("name LIKE ?", "%#{location_name}%")
         event = Event.find_or_create_by(date: date)
 
         if location && location.events.include?(event)
