@@ -50,30 +50,30 @@ module BoardGameNight
 
     private
 
-    def remove_old_events_and_locations
-      @lines.each do |date, _location|
-        if before_today?(date) && event = Event.find_by(date: date)
-          event.destroy
+      def remove_old_events_and_locations
+        @lines.each do |date, _location|
+          if before_today?(date) && event = Event.find_by(date: date)
+            event.destroy
+          end
         end
+        @lines.reject! { |date, _location| before_today?(date) }
       end
-      @lines.reject! { |date, _location| before_today?(date) }
-    end
 
-    def formatted(date)
-      date.strftime("%A %B %d, %Y")
-    end
+      def formatted(date)
+        date.strftime("%A %B %d, %Y")
+      end
 
-    def before_today?(date)
-      date < Date.today
-    end
+      def before_today?(date)
+        date < Date.today
+      end
 
-    def parse(lines)
-      lines.map do |line|
-        if line.match(/.+:.+/)
-          date, location = line.gsub(":", ": ").split(": ")
-          [Date.parse(date.strip), location.strip.delete("[]()")]
-        end
-      end.compact
-    end
+      def parse(lines)
+        lines.map do |line|
+          if line.match(/.+:.+/)
+            date, location = line.gsub(":", ": ").split(": ")
+            [Date.parse(date.strip), location.strip.delete("[]()")]
+          end
+        end.compact
+      end
   end
 end
