@@ -1,10 +1,6 @@
 # Where is r/denver board game night?
 
-[![Circle CI](https://circleci.com/gh/trayo/where_is_denver_board_game_night.svg?style=svg)](https://circleci.com/gh/trayo/where_is_denver_board_game_night)
-[![Stories in Ready](https://badge.waffle.io/trayo/where_is_denver_board_game_night.svg?label=ready&title=Ready)](http://waffle.io/trayo/where_is_denver_board_game_night)
-
 This is the source code for the [r/Denver](http://www.reddit.com/r/Denver/) Wednesday board game group that tells you, simply, where board game night is located. I was inspired by [is there a fucking rockies game](https://github.com/baer/isThereAFuckingGame) and thought that board game night needed something similar.
-### [Check it out on Heroku!](https://whereisdenverboardgamenight.herokuapp.com/)
 
 ### Nifty Features
 
